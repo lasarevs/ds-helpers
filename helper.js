@@ -1,4 +1,6 @@
 // JavaScript
+console.log('helper is loaded');
+
 $( document ).ready(function() {
     $('body').on('resize', function() {
         //location.reload();
