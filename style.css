@@ -15,6 +15,7 @@ article.qvobject
 }
 .tab
 {
+    display: inline-block;
     padding-top:50px;
 }
 .hide{
