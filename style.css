@@ -1,35 +1,39 @@
 /* CSS */
-article.qvobject
-{
+article.qvobject {
     /*position:absolute;*/
     overflow: hidden;
-    padding: 10px;
+    padding:  10px;
 }
-.radio-button-filter
-{
+
+.radio-button-filter {
     /*position: absolute;
     top:100px;*/
-    width: 180px;
-    height: 35px;
-    padding:10px;
+    width:   180px;
+    height:  35px;
+    padding: 10px;
 }
-.tab
-{
+
+.tabs {
     display: inline-block;
-    padding-top:50px;
 }
-.hide{
-    display:none;
+
+.tab {
+    display:     inline-block;
+    padding-top: 50px;
+}
+
+.hide {
+    display: none;
 }
 
 .filter_block {
-    width:180px;
-    display:inline-block;
-    position:relative;
-    vertical-align:top;
+    width:          180px;
+    display:        inline-block;
+    position:       relative;
+    vertical-align: top;
 }
 
 .filter_block .filter_item {
-    width: 180px;
+    width:  180px;
     height: 50px;
 }
