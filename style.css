@@ -13,7 +13,7 @@ article.qvobject {
     padding: 10px;
 }
 
-.tabs {
+.tabs, #tabs {
     display: inline-block;
 }
 
