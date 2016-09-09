@@ -37,3 +37,57 @@ article.qvobject {
     width:  180px;
     height: 50px;
 }
+
+.qv-listbox li.selected, .qv-listbox .serverSelected, .qv-listbox .serverLocked {
+    background-color: #fa7000;
+}
+
+.qv-state-count-bar .state.selected {
+    background-color: #fa7000;
+}
+
+.touch-off .sel-toolbar-list .sel-toolbar-confirm:hover:not(:active), .touch-off .sel-toolbar-list .sel-toolbar-confirm:focus:not(:active) {
+    background: #016bb7;
+    border-color: #016bb7;
+}
+
+.sel-toolbar-list button {
+    border-radius: 0;
+}
+
+.sel-toolbar-confirm {
+    border: 2px solid #014d84;
+    background-color: #014d84;
+}
+
+.sel-toolbar-btn:active:not(:disabled) {
+    background-color: #204d74;
+    border-color: #122b40;
+}
+
+.sel-toolbar-cancel {
+    background: #E02929;
+    border-color: #E02929;
+}
+
+.touch-off .sel-toolbar-list .sel-toolbar-cancel:hover:not(:active), .touch-off .sel-toolbar-list .sel-toolbar-cancel:focus:not(:active) {
+    background: #e65656;
+    border-color: #e65656;
+}
+.sel-toolbar-cancel.sel-toolbar-btn:active:not(:disabled) {
+    background: #bb1b1b;
+    border-color: #bb1b1b;
+}
+
+.lui-icon {
+    font: normal normal normal 14px/1 FontAwesome;
+}
+
+.qv-collapsed-listbox .title-wrapper .lui-icon--triangle-left {
+
+}
+
+.qv-collapsed-listbox .title-wrapper .lui-icon--triangle-left, .qv-collapsed-listbox .title-wrapper .lui-icon--triangle-right {
+
+}
+
