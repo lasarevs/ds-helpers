@@ -95,7 +95,7 @@ article.qvobject {
 .lui-icon--triangle-right:before {
     font: normal normal normal 14px/1 FontAwesome !important;
     content: "\f078" !important;
-    color: #bcbcbc;
+    color: #bcbcbc !important;
     height: 26px;
     line-height: 26px;
 }
