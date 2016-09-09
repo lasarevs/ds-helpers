@@ -108,3 +108,10 @@ article.qvobject {
 
 }
 
+.qv-state-count-bar .state.alternative {
+
+}
+
+.qv-state-count-bar .state.optional {
+    background: #D2D2D2;
+}
