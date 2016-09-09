@@ -65,6 +65,16 @@ article.qvobject {
     border-color: #122b40;
 }
 
+.sel-toolbar-list .sel-toolbar-confirm:disabled, .sel-toolbar-list .sel-toolbar-confirm:disabled {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.sel-toolbar-list .sel-toolbar-confirm:disabled, .sel-toolbar-list .sel-toolbar-confirm:disabled:hover {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
 .sel-toolbar-cancel {
     background: #E02929;
     border-color: #E02929;
@@ -80,7 +90,14 @@ article.qvobject {
 }
 
 .lui-icon {
-    font: normal normal normal 14px/1 FontAwesome;
+}
+
+.lui-icon--triangle-right:before {
+    font: normal normal normal 14px/1 FontAwesome !important;
+    content: "\f078" !important;
+    color: #bcbcbc;
+    height: 26px;
+    line-height: 26px;
 }
 
 .qv-collapsed-listbox .title-wrapper .lui-icon--triangle-left {
