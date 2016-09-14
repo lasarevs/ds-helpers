@@ -223,389 +223,254 @@ $(document).ready(function () {
     })
 });
 
+var paramsObject = {
+    qlik: null,
+    params: null
+};
+
 var charts = {};
 charts[QLIK_CHART_SELLED_REPORT]     = {
     template: htmlParts[QLIK_CHART_SELLED_REPORT],
-    init    : function (qlik) {
-        qlik.setOnError(function (error) {
-            if (!error.code) {
-                // Когда перезагружается qlik
-                return false;
-            }
-            if (error.code == 16) {
-                //Статистика собирается
-                return false;
-            }
-            alert(error.code + " " + error.message);
-        });
-        var params = getSearchParameters();
+    init    : function () {
+        //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
 
-//params.appId = '35dbc9d0-b865-4e5d-afa8-b83d60871769';
-        if (params.appId) {
-            //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
+        var app = paramsObject.qlik.openApp(paramsObject.params.appId, config);
+        //get objects -- inserted here --
 
-            var app = qlik.openApp(params.appId, config);
-            //get objects -- inserted here --
+        app.getObject('QVmanager', 'PKPuG');
+        app.getObject('QVroles', 'rpYfCyJ');
+        app.getObject('QV02', '104b6e24-e78b-4a4e-8167-180bbea6e378');
+        app.getObject('QVclients', 'GDdhpC');
 
-            fitChart(params);
+        app.getObject('QVproducts', 'jwCaR');
+        app.getObject('QVmanufacturers', 'WRRgCw');
+        //app.getObject('QV04','weJC');
 
-            app.getObject('QVmanager', 'PKPuG');
-            app.getObject('QVroles', 'rpYfCyJ');
-            app.getObject('QV02', '104b6e24-e78b-4a4e-8167-180bbea6e378');
-            app.getObject('QVclients', 'GDdhpC');
+        app.getObject('QV01', 'hvSjBDJ');
 
-            app.getObject('QVproducts', 'jwCaR');
-            app.getObject('QVmanufacturers', 'WRRgCw');
-            //app.getObject('QV04','weJC');
-
-            app.getObject('QV01', 'hvSjBDJ');
-
-            $(document).ready(function () {
-                $('[name="nds_type"]').click(function () {
-                    $('#QV03').html('');
-                    app.getObject('QV03', $(this).attr('data-object_id'));
-                });
-                $('[name="nds_type"]:checked').click();
-                $('#nds_radio_button').show();
+        $(document).ready(function () {
+            $('[name="nds_type"]').click(function () {
+                $('#QV03').html('');
+                app.getObject('QV03', $(this).attr('data-object_id'));
             });
-        } else {
-            document.body.textContent = 'Error! appId is not specified!';
-        }
-        //callbacks -- inserted here --
-        //open apps -- inserted here --
-        //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
-
-        //create cubes and lists -- inserted here --
+            $('[name="nds_type"]:checked').click();
+            $('#nds_radio_button').show();
+        });
     }
 };
 charts[QLIK_CHART_TURNOVER_REPORT]   = {
     template: htmlParts[QLIK_CHART_TURNOVER_REPORT],
-    init    : function (qlik) {
-        qlik.setOnError(function (error) {
-            if (!error.code) {
-                // Когда перезагружается qlik
-                return false;
+    init    : function () {
+        //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
+
+        var app = paramsObject.qlik.openApp(paramsObject.params.appId, config);
+        //get objects -- inserted here --
+        app.getObject('QVwarehouse', 'NZceQu');
+
+        var COUNT_PLOT = '46644ba1-f188-4005-90ac-3d0b9570644c';
+        app.getObject('QV02', 'b551d1c4-0372-4a5a-99b9-aef99b763093');
+        app.getObject('QV01', '8facec66-e28b-4901-b1be-17b5495b532d');
+
+        app.getObject('QVproducts', 'jwCaR');
+        app.getObject('QVmanufacturers', 'WRRgCw');
+        //app.getObject('QV04','weJC');
+
+        function showPlot() {
+            var type_plot = $('[name="type_plot"]:checked').val();
+            var ToShowId  = COUNT_PLOT;
+            if (type_plot == 'count') {
+                $('#nds_radio_button').hide();
+            } else {
+                ToShowId = $('[name="nds_type"]:checked').attr('data-object_id');
+                $('#nds_radio_button').show();
             }
-            if (error.code == 16) {
-                //Статистика собирается
-                return false;
-            }
-            alert(error.code + " " + error.message);
-        });
-        var params = getSearchParameters();
+            app.getObject('QV03', ToShowId);
 
-//params.appId = '6bd5e7d1-14a2-4f18-8d57-3ef5d0b92317';
-
-        if (params.appId) {
-            //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
-
-            fitChart(params);
-
-            var app = qlik.openApp(params.appId, config);
-            //get objects -- inserted here --
-            app.getObject('QVwarehouse', 'NZceQu');
-
-            var COUNT_PLOT = '46644ba1-f188-4005-90ac-3d0b9570644c';
-            app.getObject('QV02', 'b551d1c4-0372-4a5a-99b9-aef99b763093');
-            app.getObject('QV01', '8facec66-e28b-4901-b1be-17b5495b532d');
-
-            app.getObject('QVproducts', 'jwCaR');
-            app.getObject('QVmanufacturers', 'WRRgCw');
-            //app.getObject('QV04','weJC');
-
-            function showPlot() {
-                var type_plot = $('[name="type_plot"]:checked').val();
-                var ToShowId  = COUNT_PLOT;
-                if (type_plot == 'count') {
-                    $('#nds_radio_button').hide();
-                } else {
-                    ToShowId = $('[name="nds_type"]:checked').attr('data-object_id');
-                    $('#nds_radio_button').show();
-                }
-                app.getObject('QV03', ToShowId);
-
-            }
-
-            $(document).ready(function () {
-
-                $('[name="type_plot"]').click(function () {
-                    showPlot();
-                });
-
-                $('[name="nds_type"]').click(function () {
-                    showPlot();
-                });
-
-                $('[name="type_plot"]:checked').click();
-                $('#type_radio_button').show();
-            });
-        } else {
-            document.body.textContent = 'Error! appId is not specified!';
         }
-        //callbacks -- inserted here --
-        //open apps -- inserted here --
-        //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
 
-        //create cubes and lists -- inserted here --
+        $(document).ready(function () {
+
+            $('[name="type_plot"]').click(function () {
+                showPlot();
+            });
+
+            $('[name="nds_type"]').click(function () {
+                showPlot();
+            });
+
+            $('[name="type_plot"]:checked').click();
+            $('#type_radio_button').show();
+        });
     }
 };
 charts[QLIK_CHART_VORONKA_REPORT]    = {
     template: htmlParts[QLIK_CHART_VORONKA_REPORT],
-    init    : function (qlik) {
-        qlik.setOnError(function (error) {
-            if (!error.code) {
-                // Когда перезагружается qlik
-                return false;
+    init    : function () {
+        //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
+
+        var app = paramsObject.qlik.openApp(paramsObject.params.appId, config);
+        //get objects -- inserted here --
+
+        app.getObject('QVmanufacturers', 'JyxE');
+        app.getObject('QVwarehouse', 'DremVjU');
+        app.getObject('QV02', 'YAUbT');
+
+        app.getObject('QV01', 'KhNu');
+
+        var COUNT_PLOT = 'eb8aa8bc-13f1-44c0-a027-d1335777e213';
+
+        //app.getObject('QV04','weJC');
+
+        function showPlot() {
+            var type_plot = $('[name="type_plot"]:checked').val();
+            var ToShowId  = COUNT_PLOT;
+            if (type_plot == 'count') {
+                $('#nds_radio_button').hide();
+            } else {
+                ToShowId = $('[name="nds_type"]:checked').attr('data-object_id');
+                $('#nds_radio_button').show();
             }
-            if (error.code == 16) {
-                //Статистика собирается
-                return false;
-            }
-            alert(error.code + " " + error.message);
-        });
-        var params = getSearchParameters();
+            app.getObject('QV03', ToShowId);
 
-//params.appId = '6bd5e7d1-14a2-4f18-8d57-3ef5d0b92317';
-        if (params.appId) {
-            //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
-
-            var app = qlik.openApp(params.appId, config);
-            //get objects -- inserted here --
-
-            fitChart(params);
-
-            app.getObject('QVmanufacturers', 'JyxE');
-            app.getObject('QVwarehouse', 'DremVjU');
-            app.getObject('QV02', 'YAUbT');
-
-            app.getObject('QV01', 'KhNu');
-//
-//
-//
-
-            var COUNT_PLOT = 'eb8aa8bc-13f1-44c0-a027-d1335777e213';
-
-//
-
-            //
-
-            //app.getObject('QV04','weJC');
-
-            function showPlot() {
-                var type_plot = $('[name="type_plot"]:checked').val();
-                var ToShowId  = COUNT_PLOT;
-                if (type_plot == 'count') {
-                    $('#nds_radio_button').hide();
-                } else {
-                    ToShowId = $('[name="nds_type"]:checked').attr('data-object_id');
-                    $('#nds_radio_button').show();
-                }
-                app.getObject('QV03', ToShowId);
-
-            }
-
-            $(document).ready(function () {
-
-                $('[name="type_plot"]').click(function () {
-                    showPlot();
-                });
-
-                $('[name="nds_type"]').click(function () {
-                    showPlot();
-                });
-
-                $('[name="type_plot"]:checked').click();
-                $('#type_radio_button').show();
-            });
-        } else {
-            document.body.textContent = 'Error! appId is not specified!';
         }
-        //callbacks -- inserted here --
-        //open apps -- inserted here --
-        //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
 
-        //create cubes and lists -- inserted here --
+        $(document).ready(function () {
+
+            $('[name="type_plot"]').click(function () {
+                showPlot();
+            });
+
+            $('[name="nds_type"]').click(function () {
+                showPlot();
+            });
+
+            $('[name="type_plot"]:checked').click();
+            $('#type_radio_button').show();
+        });
     }
 };
 charts[QLIK_CHART_DEBIT_CREDIT]      = {
     template: htmlParts[QLIK_CHART_DEBIT_CREDIT],
-    init    : function (qlik) {
-        qlik.setOnError(function (error) {
-            if (!error.code) {
-                // Когда перезагружается qlik
-                return false;
-            }
-            if (error.code == 16) {
-                //Статистика собирается
-                return false;
-            }
-            alert(error.code + " " + error.message);
-        });
-        var params = getSearchParameters();
+    init    : function () {
+        //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
 
-        //params.appId = '6bd5e7d1-14a2-4f18-8d57-3ef5d0b92317';
-        if (params.appId) {
-            //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
+        var app = paramsObject.qlik.openApp(paramsObject.params.appId, config);
 
-            var app = qlik.openApp(params.appId, config);
+        //get objects -- inserted here --
+        app.getObject('QVmanufacturers', 'RXHmP');
+        app.getObject('QV02', 'RgGVTPd');
+        app.getObject('QVwarehouse', 'UhXfbL');
+        app.getObject('QV03', 'JPFHXJ');
+        app.getObject('QVvendors', 'ZXhGGJ');
 
-            fitChart(params);
-
-            //get objects -- inserted here --
-            app.getObject('QVmanufacturers', 'RXHmP');
-            app.getObject('QV02', 'RgGVTPd');
-            app.getObject('QVwarehouse', 'UhXfbL');
-            app.getObject('QV03', 'JPFHXJ');
-            app.getObject('QVvendors', 'ZXhGGJ');
-
-            app.getObject('QV01', '8facec66-e28b-4901-b1be-17b5495b532d');
-
-        } else {
-            document.body.textContent = 'Error! appId is not specified!';
-        }
-        //callbacks -- inserted here --
-        //open apps -- inserted here --
-        //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
-
-        //create cubes and lists -- inserted here --
+        app.getObject('QV01', '8facec66-e28b-4901-b1be-17b5495b532d');
     }
 };
 charts[QLIK_CHART_NDS_REPORT]        = {
     template: htmlParts[QLIK_CHART_NDS_REPORT],
-    init    : function (qlik) {
-        qlik.setOnError(function (error) {
-            if (!error.code) {
-                // Когда перезагружается qlik
-                return false;
-            }
-            if (error.code == 16) {
-                //Статистика собирается
-                return false;
-            }
-            alert(error.code + " " + error.message);
-        });
-        var params = getSearchParameters();
+    init    : function () {
+        var app = paramsObject.qlik.openApp(paramsObject.params.appId, config);
+        //get objects -- inserted here --
+        app.getObject('QV03', 'eUScwPh');
+        app.getObject('QVwarehouse', 'NZceQu');
 
-//params.appId = '35dbc9d0-b865-4e5d-afa8-b83d60871769';
-        if (params.appId) {
-            //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
+        var COUNT_PLOT = '46644ba1-f188-4005-90ac-3d0b9570644c';
+        app.getObject('QV02', 'b551d1c4-0372-4a5a-99b9-aef99b763093');
+        app.getObject('QV01', '8facec66-e28b-4901-b1be-17b5495b532d');
 
-            fitChart(params);
+        app.getObject('QVproducts', 'jwCaR');
+        app.getObject('QVmanufacturers', 'WRRgCw');
+        //app.getObject('QV04','weJC');
 
-            var app = qlik.openApp(params.appId, config);
-            //get objects -- inserted here --
-            app.getObject('QV03', 'eUScwPh');
-            app.getObject('QVwarehouse', 'NZceQu');
-
-            var COUNT_PLOT = '46644ba1-f188-4005-90ac-3d0b9570644c';
-            app.getObject('QV02', 'b551d1c4-0372-4a5a-99b9-aef99b763093');
-            app.getObject('QV01', '8facec66-e28b-4901-b1be-17b5495b532d');
-
-            app.getObject('QVproducts', 'jwCaR');
-            app.getObject('QVmanufacturers', 'WRRgCw');
-            //app.getObject('QV04','weJC');
-
-            function showPlot() {
-                var type_plot = $('[name="type_plot"]:checked').val();
-                var ToShowId  = COUNT_PLOT;
-                if (type_plot == 'count') {
-                    $('#nds_radio_button').hide();
-                } else {
-                    ToShowId = $('[name="nds_type"]:checked').attr('data-object_id');
-                    $('#nds_radio_button').show();
-                }
-
+        function showPlot() {
+            var type_plot = $('[name="type_plot"]:checked').val();
+            var ToShowId  = COUNT_PLOT;
+            if (type_plot == 'count') {
+                $('#nds_radio_button').hide();
+            } else {
+                ToShowId = $('[name="nds_type"]:checked').attr('data-object_id');
+                $('#nds_radio_button').show();
             }
 
-            $(document).ready(function () {
-
-                $('[name="type_plot"]').click(function () {
-                    showPlot();
-                });
-
-                $('[name="nds_type"]').click(function () {
-                    showPlot();
-                });
-
-                $('[name="type_plot"]:checked').click();
-                $('#type_radio_button').show();
-            });
-        } else {
-            document.body.textContent = 'Error! appId is not specified!';
         }
-        //callbacks -- inserted here --
-        //open apps -- inserted here --
-        //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
 
-        //create cubes and lists -- inserted here --
+        $(document).ready(function () {
+
+            $('[name="type_plot"]').click(function () {
+                showPlot();
+            });
+
+            $('[name="nds_type"]').click(function () {
+                showPlot();
+            });
+
+            $('[name="type_plot"]:checked').click();
+            $('#type_radio_button').show();
+        });
     }
 };
 charts[QLIK_CHART_AVG_CHEQUE_REPORT] = {
     template: htmlParts[QLIK_CHART_AVG_CHEQUE_REPORT],
-    init    : function (qlik) {
-        qlik.setOnError(function (error) {
-            if (!error.code) {
-                // Когда перезагружается qlik
-                return false;
-            }
-            if (error.code == 16) {
-                //Статистика собирается
-                return false;
-            }
-            alert(error.code + " " + error.message);
-        });
-        var params = getSearchParameters();
+    init    : function () {
+        //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
 
-        //params.appId = '6bd5e7d1-14a2-4f18-8d57-3ef5d0b92317';
+        var app = paramsObject.qlik.openApp(paramsObject.params.appId, config);
+        //get objects -- inserted here --
+        app.getObject('QV03', '93b6050b-2e41-4413-90b3-b21c358c193c');
 
-        if (params.appId) {
-            //var app = qlik.openApp('f1e94e82-1059-4f8c-8e42-598e63261ce6', config);
+        app.getObject('QVmanufacturers', 'JyxE');
+        app.getObject('QVwarehouse', 'DremVjU');
+        app.getObject('QV02', 'YAUbT');
 
-            fitChart(params);
+        app.getObject('QV01', 'KhNu');
+        //
+        //
+        //
 
-            var app = qlik.openApp(params.appId, config);
-            //get objects -- inserted here --
-            app.getObject('QV03', '93b6050b-2e41-4413-90b3-b21c358c193c');
+        var COUNT_PLOT = 'eb8aa8bc-13f1-44c0-a027-d1335777e213';
 
-            app.getObject('QVmanufacturers', 'JyxE');
-            app.getObject('QVwarehouse', 'DremVjU');
-            app.getObject('QV02', 'YAUbT');
-
-            app.getObject('QV01', 'KhNu');
-            //
-            //
-            //
-
-            var COUNT_PLOT = 'eb8aa8bc-13f1-44c0-a027-d1335777e213';
-
-            //
-
-            //
-
-            //app.getObject('QV04','weJC');
-
-            //
-
-        } else {
-            document.body.textContent = 'Error! appId is not specified!';
-        }
-        //callbacks -- inserted here --
-        //open apps -- inserted here --
-        //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
-
-        //create cubes and lists -- inserted here --
+        //app.getObject('QV04','weJC');
     }
 };
 
 function loadPage(id, qlik) {
     $('.container').html(charts[id].template);
-    charts[id].init(qlik);
+
+    paramsObject.qlik = qlik;
+    paramsObject.params.setOnError(function (error) {
+        if (!error.code) {
+            // Когда перезагружается qlik
+            return false;
+        }
+        if (error.code == 16) {
+            //Статистика собирается
+            return false;
+        }
+        alert(error.code + " " + error.message);
+    });
+    paramsObject.params = getSearchParameters();
+
+    //params.appId = '6bd5e7d1-14a2-4f18-8d57-3ef5d0b92317';
+
+    if (paramsObject.params.appId) {
+        fitChart();
+
+        charts[id].init();
+
+    } else {
+        document.body.textContent = 'Error! appId is not specified!';
+    }
+    //callbacks -- inserted here --
+    //open apps -- inserted here --
+    //var app = qlik.openApp('35dbc9d0-b865-4e5d-afa8-b83d60871769', config);
+
+    //create cubes and lists -- inserted here --
 }
 
-function fitChart(params) {
+function fitChart() {
     var chart  = $('.qlik_chart');
-    var width  = (params.width || $('body').width()) - 215;
-    var height = (params.height || $('body').height()) - 115;
+    var width  = (paramsObject.params.width || $('body').width()) - 215;
+    var height = (paramsObject.params.height || $('body').height()) - 115;
     if (height < $('.filter_block').height()) {
         height = $('.filter_block').height();
     }
