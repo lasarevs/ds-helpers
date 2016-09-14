@@ -226,7 +226,6 @@ $(document).ready(function () {
 });
 
 var charts = {};
-
 charts[QLIK_CHART_SELLED_REPORT]     = {
     template: htmlParts[QLIK_CHART_SELLED_REPORT],
     init    : function () {
