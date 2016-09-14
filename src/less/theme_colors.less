@@ -1,0 +1,35 @@
+@color01: hsl(205, 99%, 26%);
+@color01-l: lighten(saturate(spin(@color01, -7), 1%), 14%);// hsl(205, 99%, 26%) => hsl(198, 100%, 40%)
+@color01_1: lighten(saturate(spin(@color01, -7), -31%), 5%); //hsl(205, 99%, 26%) => hsl(198, 68%, 31%)
+
+
+@color02: hsl(27, 100%, 49%);
+@color02-l: lighten(hsl(27, 100%, 49%), 11%);// hsl(27, 100%, 49%) => hsl(27, 100%, 60%)
+
+
+@color03: hsl(114, 36%, 52%); /* success 2 */
+
+@color04: #E02929; /* danger */
+@color13: #C48888; /* danger 2 */
+
+
+@color05: hsl(0, 0%, 22%);
+@color14: #be97a0; /* upload */
+@color18: #9B889C;
+
+
+@color09: #F6F4F5;
+@color06: #8d9ba4;
+@color12: #AAAAAA; /* btn-gray */
+@color19: #6f6f6f;
+
+@color_black: #000000;
+@color_white: #ffffff;
+
+
+
+@primary: @color01;
+@success: #3aa8e0;
+@warning: @color02;
+@denger: @color04;
+@default: #3aa8e0;
