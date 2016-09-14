@@ -601,6 +601,7 @@ var charts = {
 }
 
 function loadPage(id) {
+    $('.container').html(charts[id].template);
     charts[id].init();
 }
 
