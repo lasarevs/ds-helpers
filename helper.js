@@ -228,7 +228,7 @@ $(document).ready(function () {
 var charts = {};
 charts[QLIK_CHART_SELLED_REPORT]     = {
     template: htmlParts[QLIK_CHART_SELLED_REPORT],
-    init    : function () {
+    init    : function (qlik) {
         qlik.setOnError(function (error) {
             if (!error.code) {
                 // Когда перезагружается qlik
@@ -282,7 +282,7 @@ charts[QLIK_CHART_SELLED_REPORT]     = {
 };
 charts[QLIK_CHART_TURNOVER_REPORT]   = {
     template: htmlParts[QLIK_CHART_TURNOVER_REPORT],
-    init    : function () {
+    init    : function (qlik) {
         qlik.setOnError(function (error) {
             if (!error.code) {
                 // Когда перезагружается qlik
@@ -353,7 +353,7 @@ charts[QLIK_CHART_TURNOVER_REPORT]   = {
 };
 charts[QLIK_CHART_VORONKA_REPORT]    = {
     template: htmlParts[QLIK_CHART_VORONKA_REPORT],
-    init    : function () {
+    init    : function (qlik) {
         qlik.setOnError(function (error) {
             if (!error.code) {
                 // Когда перезагружается qlik
@@ -431,7 +431,7 @@ charts[QLIK_CHART_VORONKA_REPORT]    = {
 };
 charts[QLIK_CHART_DEBIT_CREDIT]      = {
     template: htmlParts[QLIK_CHART_DEBIT_CREDIT],
-    init    : function () {
+    init    : function (qlik) {
         qlik.setOnError(function (error) {
             if (!error.code) {
                 // Когда перезагружается qlik
@@ -474,7 +474,7 @@ charts[QLIK_CHART_DEBIT_CREDIT]      = {
 };
 charts[QLIK_CHART_NDS_REPORT]        = {
     template: htmlParts[QLIK_CHART_NDS_REPORT],
-    init    : function () {
+    init    : function (qlik) {
         qlik.setOnError(function (error) {
             if (!error.code) {
                 // Когда перезагружается qlik
@@ -544,7 +544,7 @@ charts[QLIK_CHART_NDS_REPORT]        = {
 };
 charts[QLIK_CHART_AVG_CHEQUE_REPORT] = {
     template: htmlParts[QLIK_CHART_AVG_CHEQUE_REPORT],
-    init    : function () {
+    init    : function (qlik) {
         qlik.setOnError(function (error) {
             if (!error.code) {
                 // Когда перезагружается qlik
@@ -599,9 +599,9 @@ charts[QLIK_CHART_AVG_CHEQUE_REPORT] = {
     }
 };
 
-function loadPage(id) {
+function loadPage(id, qlik) {
     $('.container').html(charts[id].template);
-    charts[id].init();
+    charts[id].init(qlik);
 }
 
 function fitChart(params) {
