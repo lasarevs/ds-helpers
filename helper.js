@@ -217,8 +217,6 @@ htmlParts[QLIK_CHART_AVG_CHEQUE_REPORT] = '<div style="" class="filter_block"> \
         <!-- График с ндс--> \
     </div>';
 
-console.log(htmlParts);
-
 $(document).ready(function () {
     $('body').on('resize', function () {
         //location.reload();
